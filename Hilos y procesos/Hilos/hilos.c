@@ -10,12 +10,15 @@
 #include <time.h>
 
 
-#define N 1024					// Tamaño de la matriz
-#define HILOS 10				// Cantidad de HILOS
+//#define N 1024					// Tamaño de la matriz
+//#define HILOS 10				// Cantidad de HILOS
 #define MAXNUMBER 10		// Tamaño maximo de los numeros
 
+int N;
+int HILOS;
 double result;
-double A[N][N], B[N][N], C[N][N];
+double **A, **B, **C;
+
 
 void *calculateMul( void *arg ){	
 	int id = *(int *) arg;
@@ -33,15 +36,27 @@ void *calculateMul( void *arg ){
 	}
 }
 
-int main(){		
+int main(int argc, char *argv[]){	
+	HILOS = atoi(argv[1]);
+	N = atoi(argv[2]);
+	
 	int cantHilos = (N < HILOS) ? N : HILOS;  //'Si el N es menor que la cantidad de hilos requeridos, se lanzan N hilos, si no la cantidad de hilos inicial '
 	pthread_t hThread[cantHilos];
-	int numProcess[cantHilos];
-	
+	int numProcess[cantHilos];	
 
 	int i,j;
-	srand(time(NULL));	
+	srand(time(NULL));
 	
+	A = malloc(sizeof(double)*N);		
+	B = malloc(sizeof(double)*N);		
+	C = malloc(sizeof(double)*N);		
+	for(j = 0; j < N; j++){
+		A[j] = malloc(sizeof(double)*N);		
+		B[j] = malloc(sizeof(double)*N);		
+		C[j] = malloc(sizeof(double)*N);		
+	}
+
+
 	for(i = 0; i < N; i++){		
 		for(j = 0; j < N; j++){
 			A[i][j] = rand() % MAXNUMBER;
@@ -49,7 +64,7 @@ int main(){
 			//A[i][j] = rand();
 			//B[i][j] = rand();			
 		}
-	}
+	}	
 
 	for(i = 0; i < cantHilos; i++){
 		numProcess[i] = i;
