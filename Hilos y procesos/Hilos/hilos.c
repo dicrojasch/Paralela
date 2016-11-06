@@ -76,21 +76,21 @@ int main(int argc, char *argv[]){
 
 	for (i = 0; i < N; i++){
 	    for(j = 0; j < N; j++)
-	         printf("%d     ", A[i][j]);
+	         printf("%f     ", A[i][j]);
 	    printf("\n");
 	 }
 	 printf("\n");
 	 printf("\n");
 	 for (i = 0; i < N; i++){
 	    for(j = 0; j < N; j++)
-	         printf("%d     ", B[i][j]);
+	         printf("%f     ", B[i][j]);
 	    printf("\n");
 	 }
 	 printf("\n");
 	 printf("\n");
 	 for (i = 0; i < N; i++){
 	    for(j = 0; j < N; j++)
-	         printf("%d     ", C[i][j]);
+	         printf("%f     ", C[i][j]);
 	    printf("\n");
 	 }
 
