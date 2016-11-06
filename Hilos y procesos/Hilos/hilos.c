@@ -59,8 +59,10 @@ int main(int argc, char *argv[]){
 
 	for(i = 0; i < N; i++){		
 		for(j = 0; j < N; j++){
-			A[i][j] = rand() % MAXNUMBER;
-			B[i][j] = rand() % MAXNUMBER;
+			// A[i][j] = rand() % MAXNUMBER;
+			// B[i][j] = rand() % MAXNUMBER;
+			A[i][j] = j;
+			B[i][j] = j;
 			//A[i][j] = rand();
 			//B[i][j] = rand();			
 		}
@@ -95,11 +97,6 @@ int main(int argc, char *argv[]){
 	 }
 
 	return 0;
-
-
-	
-	
-
 }
 
 
