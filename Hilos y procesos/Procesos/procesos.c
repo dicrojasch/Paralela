@@ -22,13 +22,9 @@ double *calculateMul( int id ){
 		C[i] = 0;
 		for(i = 0; i < N; i++ ){
 			for(j = 0; j < N; j++){
-				C[i] += A[id][j] * B[j][i];
-				
-			}	
-			// printf("%f, ",C[i] );		
-			
-		}
-		// printf("\n");
+				C[i] += A[id][j] * B[j][i];				
+			}		
+		}		
 		id += PROCESS ;
 	}
 	return C;
@@ -36,7 +32,8 @@ double *calculateMul( int id ){
 
 
 
-int main(int argc, char *argv[]){		
+int main(int argc, char *argv[]){	
+	clock_t begin = clock();
 	PROCESS = atoi(argv[1]);
 	N = atoi(argv[2]);	
 
@@ -60,19 +57,11 @@ int main(int argc, char *argv[]){
 
 	for(i = 0; i < N; i++){		
 		for(j = 0; j < N; j++){
-			// A[i][j] = rand() % MAXNUMBER;
-			// B[i][j] = rand() % MAXNUMBER;
-			A[i][j] = j;
-			B[i][j] = j;
-			printf("%f ",A[i][j] );
-			// A[i][j] = rand();
-			//B[i][j] = rand();			
-			
+			A[i][j] = rand() % MAXNUMBER;
+			B[i][j] = rand() % MAXNUMBER;		
 
-		}
-		printf("\n");
-	}
-	printf("\n");
+		}		
+	}	
 
 	for( i = 0; i < cantProcess; i++){
 		r = pipe(pipefd[i]);
@@ -97,30 +86,27 @@ int main(int argc, char *argv[]){
 		double *C;
 		C = malloc(sizeof(double)*N);		
 		C = calculateMul(numProcess);		
-		// for(i = 0; i < N; i++){
-		// 	printf("%f ", C[i] );
-		// }
-		// printf("\n");
 		write(pipefd[numProcess][1], C, sizeof(double)*N);
 		close(pipefd[numProcess][1]);
 
 	}else{	
 		int check[numProcess]; 	
+		double **ans;		
+		ans = malloc(sizeof(double)*N);	
+			
 		for( i = 0; i < cantProcess; i++){
-			double row[N];
+			double *row;
+			row = malloc(sizeof(double)*N);
 			read(pipefd[i][0], row, sizeof(double)*N);
-			printf("Num: %d,  ", i);
-			for(j = 0; j < N; j++ ){
-				printf("%f ", row[j]);
-			}
-			printf("\n");
+			ans[i] = row;
+			close(pipefd[i][0]);
 			close(pipefd[i][0]);
 		}
-		
+		// clock_t end = clock() - begin;
+		// printf("%f\n", (double)end/CLOCKS_PER_SEC);
+	}
 
-		
-	}	
-	exit(0);
+	return 0;
 
 
 }
