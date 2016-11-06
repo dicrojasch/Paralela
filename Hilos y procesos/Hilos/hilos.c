@@ -8,11 +8,11 @@
 #include <errno.h>
 #include <ctype.h>
 #include <time.h>
-
+#include <float.h>
 
 //#define N 1024					// Tamaño de la matriz
 //#define HILOS 10				// Cantidad de HILOS
-#define MAXNUMBER 10		// Tamaño maximo de los numeros
+#define MAXNUMBER DBL_MAX	// Tamaño maximo de los numeros
 
 int N;
 int HILOS;
@@ -20,9 +20,10 @@ double result;
 double **A, **B, **C;
 
 
-void *calculateMul( void *arg ){	
+void *calculateMul( void *arg ){
 	int id = *(int *) arg;
-	int i, j;		
+	int i, j;	
+
 	while( id < N ){
 		i = 0;
 		C[id][i] = 0;
@@ -59,43 +60,26 @@ int main(int argc, char *argv[]){
 
 	for(i = 0; i < N; i++){		
 		for(j = 0; j < N; j++){
-			// A[i][j] = rand() % MAXNUMBER;
-			// B[i][j] = rand() % MAXNUMBER;
-			A[i][j] = j;
-			B[i][j] = j;
-			//A[i][j] = rand();
-			//B[i][j] = rand();			
+			A[i][j] = rand() % (int)MAXNUMBER;
+			B[i][j] = rand() % (int)MAXNUMBER;		
 		}
 	}	
 
+
 	for(i = 0; i < cantHilos; i++){
-		numProcess[i] = i;
+		numProcess[i] = i;		
 		pthread_create(&hThread[i], NULL, calculateMul, (void *)&numProcess[i]);
 	}
-	
 	for(i = 0; i < cantHilos; i++) 
-		pthread_join(hThread[i], NULL);
-
-	for (i = 0; i < N; i++){
-	    for(j = 0; j < N; j++)
-	         printf("%f     ", A[i][j]);
-	    printf("\n");
-	 }
-	 printf("\n");
-	 printf("\n");
-	 for (i = 0; i < N; i++){
-	    for(j = 0; j < N; j++)
-	         printf("%f     ", B[i][j]);
-	    printf("\n");
-	 }
-	 printf("\n");
-	 printf("\n");
-	 for (i = 0; i < N; i++){
-	    for(j = 0; j < N; j++)
-	         printf("%f     ", C[i][j]);
-	    printf("\n");
-	 }
-
+ 		pthread_join(hThread[i], NULL);
+	// for(i = 0; i < N; i++){		
+	// 	for(j = 0; j < N; j++){
+	// 		printf("%f ",  C[i][j] );
+			
+	// 	}
+	// 	printf("\n");
+	// }
+	
 	return 0;
 }
 
