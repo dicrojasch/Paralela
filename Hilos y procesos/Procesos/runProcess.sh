@@ -16,6 +16,5 @@ for (( N=8; N<1025; N+=N)); do
 done
 gcc averageTimeProcess.c -o averageTimeProcess
 ./averageTimeProcess > averageTimeProcess.out
-rm completeProcess.out
 rm averageTimeProcess
 rm procesos

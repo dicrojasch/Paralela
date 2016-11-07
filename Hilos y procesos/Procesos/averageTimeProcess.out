@@ -1,0 +1,57 @@
+Matriz 8
+- Num. Procesos 1
+      0.001000
+- Num. Procesos 2
+      0.001000
+- Num. Procesos 4
+      0.001000
+Matriz 16
+- Num. Procesos 1
+      0.001000
+- Num. Procesos 2
+      0.001000
+- Num. Procesos 4
+      0.001000
+Matriz 32
+- Num. Procesos 1
+      0.001000
+- Num. Procesos 2
+      0.001000
+- Num. Procesos 4
+      0.001000
+Matriz 64
+- Num. Procesos 1
+      0.002000
+- Num. Procesos 2
+      0.001800
+- Num. Procesos 4
+      0.001200
+Matriz 128
+- Num. Procesos 1
+      0.009600
+- Num. Procesos 2
+      0.008600
+- Num. Procesos 4
+      0.006000
+Matriz 256
+- Num. Procesos 1
+      0.076000
+- Num. Procesos 2
+      0.058400
+- Num. Procesos 4
+      0.045800
+Matriz 512
+- Num. Procesos 1
+      0.670000
+- Num. Procesos 2
+      0.640100
+- Num. Procesos 4
+      0.394500
+Matriz 1024
+- Num. Procesos 1
+      10.623000
+- Num. Procesos 2
+      10.827500
+- Num. Procesos 4
+      6.642200
+

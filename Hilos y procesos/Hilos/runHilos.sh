@@ -14,7 +14,6 @@ for (( N=8; N<1025; N+=N)); do
 	done	
 done
 gcc averageTimeHilos.c -o averageTimeHilos 
-./averageTimeHilos > averageTimeHilos.out 
-rm completeHilos.out 
+./averageTimeHilos > averageTimeHilos.out  
 rm averageTimeHilos 
 rm hilos 

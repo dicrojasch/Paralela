@@ -1,0 +1,89 @@
+Matriz 8
+- Num. Hilos 1
+      0.001000
+- Num. Hilos 2
+      0.001000
+- Num. Hilos 4
+      0.001000
+- Num. Hilos 8
+      0.001000
+- Num. Hilos 16
+      0.001000
+Matriz 16
+- Num. Hilos 1
+      0.001000
+- Num. Hilos 2
+      0.001000
+- Num. Hilos 4
+      0.001000
+- Num. Hilos 8
+      0.001000
+- Num. Hilos 16
+      0.001000
+Matriz 32
+- Num. Hilos 1
+      0.001000
+- Num. Hilos 2
+      0.001000
+- Num. Hilos 4
+      0.001000
+- Num. Hilos 8
+      0.001000
+- Num. Hilos 16
+      0.001000
+Matriz 64
+- Num. Hilos 1
+      0.002400
+- Num. Hilos 2
+      0.001800
+- Num. Hilos 4
+      0.001700
+- Num. Hilos 8
+      0.002200
+- Num. Hilos 16
+      0.002000
+Matriz 128
+- Num. Hilos 1
+      0.012400
+- Num. Hilos 2
+      0.007900
+- Num. Hilos 4
+      0.007300
+- Num. Hilos 8
+      0.007300
+- Num. Hilos 16
+      0.007500
+Matriz 256
+- Num. Hilos 1
+      0.105300
+- Num. Hilos 2
+      0.091400
+- Num. Hilos 4
+      0.056900
+- Num. Hilos 8
+      0.059300
+- Num. Hilos 16
+      0.057900
+Matriz 512
+- Num. Hilos 1
+      0.879700
+- Num. Hilos 2
+      0.945300
+- Num. Hilos 4
+      0.533400
+- Num. Hilos 8
+      0.541400
+- Num. Hilos 16
+      0.537500
+Matriz 1024
+- Num. Hilos 1
+      16.668600
+- Num. Hilos 2
+      10.481200
+- Num. Hilos 4
+      6.401600
+- Num. Hilos 8
+      6.021600
+- Num. Hilos 16
+      6.123800
+
