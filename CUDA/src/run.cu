@@ -1,21 +1,15 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <cuda_runtime.h>
 
 #include <helper_cuda.h>
 
 
-int main1(void){
+int main(void){
     cudaError_t err = cudaSuccess;
-    int multiP = 0, cores = 0;
-
-    // Measure time
-    cudaEvent_t start, stop;
-    float elapsedTime;
-    cudaEventCreate(&start); cudaEventRecord(start,0); // Start Measure
-
+    int N, threads, blocks, multiP = 0, cores = 0, i;
     int deviceCount = 0;
     err = cudaGetDeviceCount(&deviceCount);
-
     if (err != cudaSuccess){
 		printf("cudaGetDeviceCount returned %d\n-> %s\n", (int)err, cudaGetErrorString(err));
 		printf("Result = FAIL\n");
@@ -30,12 +24,32 @@ int main1(void){
     cudaGetDeviceProperties(&deviceProp, 0);
     multiP = deviceProp.multiProcessorCount;
     cores = _ConvertSMVer2Cores(deviceProp.major, deviceProp.minor);
-    printf("%d , %d \n",multiP, cores);
+    printf("Multiprocessors(MP): %d , Cores x MP: %d \n", multiP, cores);
+    char commandBase[12] = "./src/mult ";
 
 
-    cudaEventCreate(&stop);  cudaEventRecord(stop,0); cudaEventSynchronize(stop); // Stop Measure
-    cudaEventElapsedTime(&elapsedTime, start,stop);
-    printf("Elapsed time : %f ms\n" ,elapsedTime);
+
+    for( N = 8; N < 1025; N += N ){
+    	printf("Matrix %d x %d\n",N,N);
+    	for( blocks = 1; blocks <= multiP; blocks++ ){
+    		printf("  Block %d\n",blocks);
+    		for( threads = 32; threads < 1025; threads += threads ){
+    		    char partialCommand[30] = "";
+    		    char toChar[15] = "";
+    			printf("    Thread %d\n", threads);
+    			strcat( partialCommand, commandBase);
+    			sprintf(toChar, "%d %d %d", N, threads, blocks);
+    			strcat( partialCommand, toChar);
+    			for(i = 1; i < 11; i++ ){
+    				printf("      Repeticion %d\n",i);
+    				system(partialCommand);
+    			}
+    		}
+    	}
+    }
+
+
+
     return 0;
 }
 

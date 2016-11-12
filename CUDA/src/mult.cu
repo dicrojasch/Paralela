@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include<sys/time.h>
+#include <sys/time.h>
 #include <cuda_runtime.h>
 #include <cuda.h>
 #include <helper_cuda.h>
@@ -21,7 +21,11 @@ __global__ void matrixMult(const double *A, const double *B, double *C, int N){
 	}
 }
 
-int main(int argc, char *argv[]){
+int main1(int argc, char *argv[]){
+    cudaEvent_t start, stop;
+    float elapsedTime;
+	cudaEventCreate(&start); cudaEventRecord(start,0); // Start Measure
+
 	int i, N = atoi(argv[1]), threadsPerBlock = atoi(argv[2]), blocksPerGrid = atoi(argv[3]);
 	size_t size = sizeof(double) * (N*N);
 	cudaError_t err = cudaSuccess;
@@ -74,7 +78,7 @@ int main(int argc, char *argv[]){
         exit(EXIT_FAILURE);
     }
 
-    matrixMult<<<blocksPerGrid, threadsPerBlock>>>(d_A, d_B, d_C, N);
+	matrixMult<<<blocksPerGrid, threadsPerBlock>>>(d_A, d_B, d_C, N);
 
     err = cudaGetLastError();
     if (err != cudaSuccess){
@@ -115,5 +119,9 @@ int main(int argc, char *argv[]){
 	free(h_A);
 	free(h_B);
 	free(h_C);
+
+	cudaEventCreate(&stop);  cudaEventRecord(stop,0); cudaEventSynchronize(stop); // Stop Measure
+	cudaEventElapsedTime(&elapsedTime, start,stop);
+	printf("        Elapsed time : %f ms\n" ,elapsedTime);
 	return 0;
 }
